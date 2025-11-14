@@ -4,6 +4,7 @@ Trains separate models for each of the 4 target markets
 """
 
 import os
+import sys
 import json
 import pickle
 from datetime import datetime
@@ -15,6 +16,9 @@ from sklearn.metrics import accuracy_score, log_loss, roc_auc_score, classificat
 from xgboost import XGBClassifier
 import warnings
 warnings.filterwarnings('ignore')
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from features import FeatureEngineer
 
@@ -214,6 +218,8 @@ class ModelTrainer:
                 
             except Exception as e:
                 print(f"❌ Error training {market} model: {e}")
+                import traceback
+                traceback.print_exc()
                 continue
         
         # Save models and metadata
