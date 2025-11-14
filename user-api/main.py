@@ -8,9 +8,10 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import sys
+from pathlib import Path
 
 # Add parent directory to path for imports
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from data_ingestion.database import get_db_session, init_db
 from data_ingestion.schemas import BatchIngestRequest, IngestResponse
