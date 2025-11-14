@@ -1,5 +1,13 @@
 # Football Betting AI System
 
+> **🎉 Phase 2 Complete!** Smart Bets AI is now fully functional. Train models and start making predictions!  
+> **📊 Progress:** 50% Complete (2 of 5 phases done)  
+> **✅ Working:** Data Ingestion, Smart Bets AI  
+> **🔄 Next:** Golden Bets AI (85%+ confidence filtering)  
+> **📖 Quick Start:** See [SMART_BETS_QUICKSTART.md](SMART_BETS_QUICKSTART.md)
+
+---
+
 ## Overview
 This project is the **AI prediction engine** - the intelligent core that analyzes football fixtures and generates betting predictions across **4 specific betting markets**. It receives data from your main app, runs AI models, and returns four distinct types of betting intelligence with transparent reasoning.
 
@@ -23,10 +31,10 @@ This system focuses exclusively on:
 ✅ **Accepts data** from your app (fixtures, stats, odds for the 4 markets)  
 ✅ **Runs AI models** to generate predictions for the 4 markets  
 ✅ **Delivers four betting intelligence features:**
-- **Golden Bets:** 1-3 daily picks with 85%+ win probability (safety-focused)
-- **Value Bets:** Top 3 daily picks with positive expected value (profit-focused)
-- **Smart Bets:** Best single bet per fixture across the 4 markets (match-specific)
-- **Custom Bet Analysis:** User-selected fixture + bet type analysis from the 4 markets (interactive learning)
+- **Golden Bets:** 1-3 daily picks with 85%+ win probability (safety-focused) *[Coming in Phase 3]*
+- **Value Bets:** Top 3 daily picks with positive expected value (profit-focused) *[Coming in Phase 4]*
+- **Smart Bets:** Best single bet per fixture across the 4 markets (match-specific) **[✅ WORKING NOW]**
+- **Custom Bet Analysis:** User-selected fixture + bet type analysis from the 4 markets (interactive learning) *[Coming in Phase 5]*
 
 ✅ **Generates transparent explanations** for every recommendation  
 ✅ **Exposes API endpoints** for your app to query  
@@ -44,9 +52,36 @@ This system focuses exclusively on:
 
 ---
 
+## 🚀 Quick Start (5 Minutes)
+
+```bash
+# 1. Clone and install
+git clone https://github.com/dannythehat/football-betting-ai-system.git
+cd football-betting-ai-system
+pip install -r requirements.txt
+
+# 2. Train models
+python smart-bets-ai/train.py
+
+# 3. Test predictions
+python smart-bets-ai/predict.py
+
+# 4. Start API
+cd user-api && python main.py
+
+# 5. Make prediction
+curl -X POST http://localhost:8000/api/v1/predictions/smart-bets \
+  -H "Content-Type: application/json" \
+  -d '{"matches": [...]}'
+```
+
+**Full guide:** [SMART_BETS_QUICKSTART.md](SMART_BETS_QUICKSTART.md)
+
+---
+
 ## The Four Betting Intelligence Features
 
-### 1. Golden Bets (Premium Feature)
+### 1. Golden Bets (Premium Feature) *[Phase 3 - Coming Soon]*
 **Daily 1-3 picks | 85%+ win probability**
 
 **Purpose:** Present users with the platform's most confident, safe betting opportunities each day from the 4 markets.
@@ -65,7 +100,7 @@ This system focuses exclusively on:
 
 ---
 
-### 2. Value Bets (Premium Feature)
+### 2. Value Bets (Premium Feature) *[Phase 4 - Coming Soon]*
 **Daily top 3 picks | Positive expected value**
 
 **Purpose:** Identify bets where potential return exceeds risk implied by the market across the 4 markets.
@@ -85,7 +120,7 @@ This system focuses exclusively on:
 
 ---
 
-### 3. Smart Bets (Per Fixture)
+### 3. Smart Bets (Per Fixture) **[✅ WORKING NOW]**
 **Best single bet per match | All 4 markets analyzed**
 
 **Purpose:** Provide tailored, detailed betting insight on individual matches.
@@ -102,9 +137,13 @@ This system focuses exclusively on:
 - Pure probabilistic analysis without odds consideration
 - Shows alternative markets with their probabilities
 
+**Status:** ✅ Fully implemented and working  
+**Documentation:** [smart-bets-ai/README.md](smart-bets-ai/README.md)  
+**API Endpoint:** `POST /api/v1/predictions/smart-bets`
+
 ---
 
-### 4. Custom Bet Analysis (Interactive Feature)
+### 4. Custom Bet Analysis (Interactive Feature) *[Phase 5 - Coming Soon]*
 **User-selected fixture + bet type | On-demand analysis**
 
 **Purpose:** Empower users to test their own betting hypotheses independently.
@@ -126,25 +165,25 @@ This system focuses exclusively on:
 ## Architecture
 The system is composed of several interconnected modules:
 
-### **data-ingestion/**
+### **data-ingestion/** ✅ Complete
 Receives and validates fixture data, team stats, and odds for the 4 markets from your main app.
 
-### **smart-bets-ai/**
+### **smart-bets-ai/** ✅ Complete
 Calculates pure probabilistic predictions for each match across the 4 markets using AI models (XGBoost/LightGBM baseline).
 
-### **golden-bets-ai/**
+### **golden-bets-ai/** 🔄 Next
 Identifies high-confidence bets (85%+) across the 4 markets using confidence thresholds and ensemble agreement metrics.
 
-### **odds-updater/**
+### **odds-updater/** ⏳ Pending
 Processes odds updates from your app for real-time value calculations across the 4 markets.
 
-### **value-bets-ai/**
+### **value-bets-ai/** ⏳ Pending
 Dynamically recalculates value bets by comparing AI probabilities vs implied odds probabilities for the 4 markets.
 
-### **summary-generator/**
+### **summary-generator/** ⏳ Pending
 Creates human-readable AI explanations for all bet recommendations with educational focus.
 
-### **user-api/**
+### **user-api/** ✅ Complete
 Serves predictions and explanations to your main app via REST API endpoints.
 
 ---
@@ -198,25 +237,8 @@ Serves predictions and explanations to your main app via REST API endpoints.
 {
   "predictions": [{
     "match_id": "12345",
-    "golden_bets": [{
-      "market_id": "total_corners",
-      "market_name": "Total Corners",
-      "selection_id": "over_9.5",
-      "selection_name": "Over 9.5 Corners",
-      "probability": 0.87,
-      "confidence": "very_high",
-      "explanation": "Both teams average 10 corners combined per match. Historical data strongly supports this prediction."
-    }],
-    "value_bets": [{
-      "market_id": "btts",
-      "market_name": "Both Teams To Score",
-      "selection_id": "yes",
-      "selection_name": "Yes",
-      "ai_probability": 0.68,
-      "implied_probability": 0.54,
-      "value": 0.14,
-      "explanation": "AI probability (68%) significantly exceeds bookmaker's implied probability (54%), indicating strong positive expected value"
-    }],
+    "golden_bets": [{ }],
+    "value_bets": [{ }],
     "smart_bets": [{
       "market_id": "total_corners",
       "market_name": "Total Corners",
@@ -243,49 +265,26 @@ Serves predictions and explanations to your main app via REST API endpoints.
 }
 ```
 
-### Custom Analysis Output:
-```json
-{
-  "match_id": "12345",
-  "bet_type": "over_2.5_goals",
-  "market_id": "total_goals",
-  "selection_id": "over_2.5",
-  "probability": 0.67,
-  "percentage": "67%",
-  "verdict": "moderate",
-  "confidence": "medium",
-  "explanation": "Both teams average 2.5+ goals combined. Team A's attacking form is strong (1.4 goals/game), Team B concedes frequently. 4 of last 5 head-to-head meetings had over 2.5 goals.",
-  "comparison_note": "This confidence (67%) is lower than our Smart Bet recommendation for this fixture (87% for Over 9.5 Corners), which analyzed all 4 available markets.",
-  "smart_bet_alternative": {
-    "market_name": "Total Corners - Over 9.5",
-    "probability": 0.87
-  }
-}
-```
-
 See [SCOPE.md](SCOPE.md) for complete data format specifications.
 
 ---
 
 ## Development Workflow
 
-1. **Data Ingestion:**
+1. **✅ Data Ingestion:** (Phase 1 - Complete)
    Build the data-ingestion module to receive and validate data from your app for the 4 markets.
 
-2. **Model Development:**
-   Develop 4 separate models (Goals, Cards, Corners, BTTS) using XGBoost/LightGBM. Train on historical data.
+2. **✅ Smart Bets AI:** (Phase 2 - Complete)
+   Develop 4 separate models (Goals, Cards, Corners, BTTS) using XGBoost. Train on historical data.
 
-3. **Odds Processing:**
-   Create odds-updater to handle real-time odds updates from your app for the 4 markets.
+3. **🔄 Golden Bets AI:** (Phase 3 - Next)
+   Implement 85%+ confidence filtering and ensemble validation.
 
-4. **Value Calculation:**
-   Implement value-bets-ai to dynamically calculate value (AI prob - implied prob) across the 4 markets.
+4. **⏳ Odds Processing & Value Bets:** (Phase 4 - Pending)
+   Create odds-updater and value-bets-ai for dynamic EV calculations.
 
-5. **Explanations & Serving:**
-   Generate transparent, educational explanations through summary-generator and serve via user-api.
-
-6. **Integration & Testing:**
-   Connect modules via shared DBs, implement caching, validate with tests.
+5. **⏳ Explanations & Polish:** (Phase 5 - Pending)
+   Generate enhanced explanations, custom analysis, caching, and testing.
 
 ---
 
@@ -300,7 +299,7 @@ The system trains **4 separate models**, one for each market:
 3. **Corners Model:** Predicts Over/Under 9.5 corners
 4. **BTTS Model:** Predicts Both Teams To Score Yes/No
 
-### Baseline: XGBoost/LightGBM
+### Baseline: XGBoost
 - Probabilistic classification trained on historical match outcomes
 - Outputs probability distributions for each of the 4 markets
 - Focus on accuracy, explainability, and transparency
@@ -322,18 +321,15 @@ Pure AI probabilities without considering odds, selecting highest probability ac
 ### Custom Analysis
 Same trained models applied to user-selected bets from the 4 markets with educational explanations
 
-### Future Enhancement
-Neural networks or transformer models for deeper pattern recognition after baseline validation
-
 ---
 
 ## Strategic Feature Positioning
 
 | Feature | Focus | Confidence | Markets Analyzed | User Type |
-|---------|-------|------------|------------------|-----------|
-| Golden Bets | Win rate | Highest (85%+) | All 4 markets | Premium - Safety seekers |
-| Value Bets | ROI/EV | Variable | All 4 markets | Premium - Strategic bettors |
-| Smart Bets | Per-match | High | All 4 markets | All users - Match focus |
+|---------|-------|------------|------------------|-----------|\
+| Golden Bets | Win rate | Highest (85%+) | All 4 markets | Premium - Safety seekers |\
+| Value Bets | ROI/EV | Variable | All 4 markets | Premium - Strategic bettors |\
+| Smart Bets | Per-match | High | All 4 markets | All users - Match focus |\
 | Custom Analysis | Education | Variable | User-selected from 4 | Advanced - Learning |
 
 **User Journey:**
@@ -346,22 +342,11 @@ Neural networks or transformer models for deeper pattern recognition after basel
 ## Tools & Technologies
 
 - **Python** (AI models and APIs)
-- **XGBoost / LightGBM** (baseline models for each market)
+- **XGBoost** (baseline models for each market)
 - **FastAPI** (API endpoints)
 - **PostgreSQL** (data storage)
 - **Redis** (caching layer)
 - **Docker** (containerization)
-- **GitHub Actions** (CI/CD)
-
----
-
-## Deployment & Scaling
-
-- Cloud hosting (AWS, GCP, Azure)
-- Docker Compose or Kubernetes
-- Horizontal scaling for API endpoints
-- Redis caching for sub-second response times
-- Monitoring via logs, metrics, alerts
 
 ---
 
@@ -385,6 +370,20 @@ Your App → [JSON Input] → AI Prediction Engine → [JSON Output] → Your Ap
                               ↓
                       [Cached Results]
 ```
+
+---
+
+## Documentation
+
+- **[STATUS.md](STATUS.md)** - Current project status and progress
+- **[ROADMAP.md](ROADMAP.md)** - Implementation plan and timeline
+- **[SCOPE.md](SCOPE.md)** - Technical specifications
+- **[FEATURES.md](FEATURES.md)** - Detailed feature descriptions
+- **[GETTING_STARTED.md](GETTING_STARTED.md)** - Setup instructions
+- **[QUICKSTART.md](QUICKSTART.md)** - Developer quick start
+- **[SMART_BETS_QUICKSTART.md](SMART_BETS_QUICKSTART.md)** - Smart Bets 5-minute guide
+- **[PHASE_2_SUMMARY.md](PHASE_2_SUMMARY.md)** - Phase 2 implementation details
+- **[smart-bets-ai/README.md](smart-bets-ai/README.md)** - Smart Bets AI documentation
 
 ---
 
