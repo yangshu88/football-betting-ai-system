@@ -5,15 +5,18 @@
 > **📊 SELF-MAINTAINING** - Tests run every 6 hours, models retrain weekly  
 > **🚀 NO BABYSITTING** - System handles everything
 
+## 🚀 **[→ DEPLOY TO RENDER NOW (5 Minutes)](DEPLOY_TO_RENDER.md)** 🚀
+
 ---
 
 ## 🎯 Quick Links
 
-- **Deploy Now:** [Render Deployment Guide](DEPLOYMENT.md)
-- **Workflows:** [GitHub Actions](https://github.com/dannythehat/football-betting-ai-system/actions)
-- **Execution Summary:** [EXECUTION_SUMMARY.md](EXECUTION_SUMMARY.md)
-- **API Docs:** [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
-- **System Status:** [SYSTEM_STATUS.md](SYSTEM_STATUS.md)
+- **🚀 Quick Deploy:** [5-Minute Render Setup](DEPLOY_TO_RENDER.md)
+- **📖 Full Deployment Guide:** [DEPLOYMENT.md](DEPLOYMENT.md)
+- **⚙️ Workflows:** [GitHub Actions](https://github.com/dannythehat/football-betting-ai-system/actions)
+- **📊 Execution Summary:** [EXECUTION_SUMMARY.md](EXECUTION_SUMMARY.md)
+- **📚 API Docs:** [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
+- **💚 System Status:** [SYSTEM_STATUS.md](SYSTEM_STATUS.md)
 
 ---
 
@@ -88,21 +91,23 @@ AI-powered betting intelligence for **4 specific markets:**
 
 ## 🚀 Quick Start
 
-### Option 1: Deploy to Render (Recommended)
-```bash
-# 1. Go to https://render.com
-# 2. Sign up with GitHub
-# 3. Click "New +" → "Blueprint"
-# 4. Select this repo
-# 5. Click "Apply"
-# 6. Wait 3-5 minutes
-# 7. Your API is live!
+### Option 1: Deploy to Render (Recommended - 5 Minutes)
 
-# Check health
+**[→ Follow the 5-Minute Deploy Guide](DEPLOY_TO_RENDER.md)**
+
+Quick steps:
+1. Go to https://render.com
+2. Sign up with GitHub
+3. Click "New +" → "Blueprint"
+4. Select this repo
+5. Click "Apply"
+6. Wait 3-5 minutes
+7. Your API is live!
+
+```bash
+# Test your deployed API
 curl https://your-app-name.onrender.com/health
 ```
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
 
 ### Option 2: Monitor Automation
 ```bash
@@ -142,7 +147,8 @@ cd user-api && python main.py
 
 | Document | Purpose |
 |----------|---------|
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Deploy to Render in 5 minutes |
+| **[DEPLOY_TO_RENDER.md](DEPLOY_TO_RENDER.md)** | **5-minute quick deploy guide** |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Full deployment guide with options |
 | [EXECUTION_SUMMARY.md](EXECUTION_SUMMARY.md) | What was built and how it works |
 | [API_DOCUMENTATION.md](API_DOCUMENTATION.md) | Complete API reference |
 | [SYSTEM_STATUS.md](SYSTEM_STATUS.md) | Real-time system health |
@@ -281,10 +287,13 @@ See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for details.
 
 ## 🚀 Deploy Now
 
+**[→ 5-Minute Deploy Guide](DEPLOY_TO_RENDER.md)**
+
+Or manual steps:
 1. Go to https://render.com
 2. Sign up with GitHub
 3. Deploy this repo as Blueprint
 4. Wait 5 minutes
 5. Your API is live!
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for step-by-step guide.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed guide.
