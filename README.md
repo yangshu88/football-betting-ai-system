@@ -1,7 +1,7 @@
 # ⚽ Football Betting AI System
 
 > **🤖 FULLY AUTOMATED** - Models train, test, and deploy automatically  
-> **✅ PRODUCTION READY** - Live on Railway with zero manual intervention  
+> **✅ PRODUCTION READY** - Deploy to Render in 5 minutes  
 > **📊 SELF-MAINTAINING** - Tests run every 6 hours, models retrain weekly  
 > **🚀 NO BABYSITTING** - System handles everything
 
@@ -9,7 +9,7 @@
 
 ## 🎯 Quick Links
 
-- **Live API:** https://football-betting-ai-system-production.up.railway.app
+- **Deploy Now:** [Render Deployment Guide](DEPLOYMENT.md)
 - **Workflows:** [GitHub Actions](https://github.com/dannythehat/football-betting-ai-system/actions)
 - **Execution Summary:** [EXECUTION_SUMMARY.md](EXECUTION_SUMMARY.md)
 - **API Docs:** [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
@@ -66,9 +66,9 @@ AI-powered betting intelligence for **4 specific markets:**
 - **Status:** ✅ Running
 
 ### Deployment
-- **Platform:** Railway
+- **Platform:** Render (Free Tier)
 - **Trigger:** Auto-deploy on push to main
-- **Status:** ✅ Live
+- **Status:** ✅ Ready to deploy
 
 ---
 
@@ -82,22 +82,27 @@ AI-powered betting intelligence for **4 specific markets:**
 | **Custom Analysis** | ✅ Working | Educational |
 | **Model Training** | ✅ Automated | Weekly schedule |
 | **Testing Suite** | ✅ Running | Every 6 hours |
-| **Production API** | ✅ Live | Railway deployment |
+| **Deployment** | ✅ Ready | Render config ready |
 
 ---
 
 ## 🚀 Quick Start
 
-### Option 1: Use the Live API
+### Option 1: Deploy to Render (Recommended)
 ```bash
-# Health check
-curl https://football-betting-ai-system-production.up.railway.app/health
+# 1. Go to https://render.com
+# 2. Sign up with GitHub
+# 3. Click "New +" → "Blueprint"
+# 4. Select this repo
+# 5. Click "Apply"
+# 6. Wait 3-5 minutes
+# 7. Your API is live!
 
-# Get predictions
-curl -X POST https://football-betting-ai-system-production.up.railway.app/api/v1/predictions/smart-bets \
-  -H "Content-Type: application/json" \
-  -d '{"matches": [...]}'
+# Check health
+curl https://your-app-name.onrender.com/health
 ```
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
 
 ### Option 2: Monitor Automation
 ```bash
@@ -137,9 +142,8 @@ cd user-api && python main.py
 
 | Document | Purpose |
 |----------|---------|
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Deploy to Render in 5 minutes |
 | [EXECUTION_SUMMARY.md](EXECUTION_SUMMARY.md) | What was built and how it works |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Deployment guide and monitoring |
-| [TESTING_VALIDATION.md](TESTING_VALIDATION.md) | Testing procedures |
 | [API_DOCUMENTATION.md](API_DOCUMENTATION.md) | Complete API reference |
 | [SYSTEM_STATUS.md](SYSTEM_STATUS.md) | Real-time system health |
 | [QUICKSTART.md](QUICKSTART.md) | Quick start guide |
@@ -163,7 +167,7 @@ cd user-api && python main.py
    - Updates documentation
 
 3. **Deployment (On Push)**
-   - Railway auto-deploys
+   - Render auto-deploys
    - Zero downtime
    - Instant updates
 
@@ -181,7 +185,7 @@ gh workflow run full-test-deploy.yml
 
 ## 🎯 API Endpoints
 
-**Base URL:** `https://football-betting-ai-system-production.up.railway.app`
+**Base URL:** `https://your-app-name.onrender.com`
 
 - `GET /health` - Health check
 - `POST /api/v1/predictions/smart-bets` - Best bet per match
@@ -199,7 +203,7 @@ See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for details.
 - **API:** FastAPI, Uvicorn
 - **Database:** PostgreSQL
 - **Cache:** Redis
-- **Deployment:** Railway
+- **Deployment:** Render (Free Tier)
 - **CI/CD:** GitHub Actions
 - **Testing:** pytest, automated workflows
 
@@ -211,10 +215,33 @@ See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for details.
 - ✅ Tests run every 6 hours
 - ✅ Results committed to repo
 - ✅ Deployment on every push
-- ✅ API stays live 24/7
+- ✅ API stays live 24/7 (with Render)
 - ✅ Metrics tracked continuously
 
 **No manual intervention required.**
+
+---
+
+## 💡 Deployment Options
+
+### Free Tier (Testing)
+**Render Free Tier** - Perfect for testing
+- 750 hours/month
+- Auto-deploy from GitHub
+- Free PostgreSQL + Redis
+- Sleeps after 15min inactivity
+
+### Production ($7/month)
+**Render Starter Plan** - Always on
+- No sleep
+- Faster performance
+- Better for production
+
+### Self-Hosted ($5/month)
+**DigitalOcean/Linode VPS**
+- Full control
+- More setup required
+- See [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ---
 
@@ -222,7 +249,7 @@ See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for details.
 
 - [x] Models train automatically
 - [x] Tests run without intervention
-- [x] System deployed to production
+- [x] Deployment configuration ready
 - [x] API endpoints functional
 - [x] Documentation complete
 - [x] Monitoring in place
@@ -237,30 +264,27 @@ See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for details.
 **This system:**
 - Trains itself
 - Tests itself
-- Deploys itself
+- Deploys itself (to Render)
 - Documents itself
 - Maintains itself
 
 **Your job:**
+- Deploy to Render (5 minutes)
 - Monitor occasionally
 - Use the API
-- Enjoy your holiday
+- Build more features
 
 **System's job:**
 - Everything else
 
 ---
 
-## 📞 Support
+## 🚀 Deploy Now
 
-Check these in order:
-1. [Workflow runs](https://github.com/dannythehat/football-betting-ai-system/actions)
-2. [Test results](test-results/TEST_REPORT.md)
-3. [System status](SYSTEM_STATUS.md)
-4. [Documentation](EXECUTION_SUMMARY.md)
+1. Go to https://render.com
+2. Sign up with GitHub
+3. Deploy this repo as Blueprint
+4. Wait 5 minutes
+5. Your API is live!
 
----
-
-**Built by:** Bhindi AI  
-**Status:** Production Ready ✅  
-**Last Updated:** Auto-generated on every commit
+See [DEPLOYMENT.md](DEPLOYMENT.md) for step-by-step guide.
