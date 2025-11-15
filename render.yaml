@@ -1,0 +1,40 @@
+services:
+  # Web Service - FastAPI Application
+  - type: web
+    name: football-betting-ai
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: cd user-api && uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: football-betting-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: football-betting-redis
+          property: connectionString
+
+databases:
+  # PostgreSQL Database
+  - name: football-betting-db
+    databaseName: football_betting
+    plan: free
+    region: oregon
+
+  # Redis Cache
+  - name: football-betting-redis
+    plan: free
+    region: oregon
+    maxmemoryPolicy: allkeys-lru
