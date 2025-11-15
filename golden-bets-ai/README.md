@@ -20,7 +20,26 @@ Golden Bets AI applies strict confidence filtering to Smart Bets predictions, id
 
 ## Usage
 
-### Basic Filtering
+### Quick Prediction (Recommended)
+
+```python
+from golden_bets_ai import GoldenBetsPredictor
+
+# Initialize predictor (handles Smart Bets integration automatically)
+predictor = GoldenBetsPredictor()
+
+# Get Golden Bets predictions
+golden_bets = predictor.predict(matches)
+
+# Display results
+for bet in golden_bets:
+    print(f"{bet['home_team']} vs {bet['away_team']}")
+    print(f"Market: {bet['market_name']}")
+    print(f"Confidence: {bet['confidence_score']:.1%}")
+    print(f"Reasoning: {bet['reasoning']}")
+```
+
+### Manual Filtering (Advanced)
 
 ```python
 from golden_bets_ai import GoldenBetsFilter
@@ -43,21 +62,29 @@ for bet in golden_bets:
 ### Input Format
 
 ```python
-smart_bets_predictions = [
+matches = [
     {
         'match_id': '12345',
-        'probability': 0.87,
-        'market_name': 'Total Corners',
-        'selection_name': 'Over 9.5',
         'home_team': 'Team A',
-        'away_team': 'Team B'
+        'away_team': 'Team B',
+        'stats': {
+            'home_goals_avg': 1.4,
+            'away_goals_avg': 1.1,
+            'home_corners_avg': 5.2,
+            'away_corners_avg': 4.8,
+            'home_cards_avg': 2.1,
+            'away_cards_avg': 1.8,
+            'home_btts_rate': 0.6,
+            'away_btts_rate': 0.5
+        },
+        'odds': {
+            'total_goals': {'over_2.5': 2.10, 'under_2.5': 1.75},
+            'total_cards': {'over_3.5': 1.95, 'under_3.5': 1.85},
+            'total_corners': {'over_9.5': 1.90, 'under_9.5': 1.90},
+            'btts': {'yes': 1.85, 'no': 2.00}
+        }
     }
 ]
-
-# Optional: Individual model probabilities for ensemble agreement
-model_probabilities = {
-    '12345': np.array([0.86, 0.88, 0.87, 0.85])  # 4 models
-}
 ```
 
 ### Output Format
@@ -66,14 +93,16 @@ model_probabilities = {
 golden_bets = [
     {
         'match_id': '12345',
+        'home_team': 'Team A',
+        'away_team': 'Team B',
         'probability': 0.87,
         'market_name': 'Total Corners',
         'selection_name': 'Over 9.5',
         'confidence_score': 0.87,
         'ensemble_agreement': 0.95,
         'golden_score': 0.894,  # (0.7 * 0.87) + (0.3 * 0.95)
-        'home_team': 'Team A',
-        'away_team': 'Team B'
+        'bet_category': 'golden',
+        'reasoning': '🏆 Golden Bet Selection Criteria Met...'
     }
 ]
 ```
@@ -129,6 +158,18 @@ golden_score = (0.7 * probability) + (0.3 * agreement)
 
 ## Integration with Smart Bets AI
 
+### Using Predictor (Automatic)
+
+```python
+from golden_bets_ai import GoldenBetsPredictor
+
+# Predictor handles Smart Bets integration automatically
+predictor = GoldenBetsPredictor()
+golden_bets = predictor.predict(matches)
+```
+
+### Using Filter (Manual)
+
 ```python
 from smart_bets_ai import SmartBetsPredictor
 from golden_bets_ai import GoldenBetsFilter
@@ -153,11 +194,14 @@ golden_bets = filter.filter_golden_bets(
 ## Testing
 
 ```bash
+# Run prediction pipeline
+python golden-bets-ai/predict.py
+
+# Test filter with sample data
+python golden-bets-ai/test_filter.py
+
 # Run unit tests
 python -m pytest golden-bets-ai/tests/
-
-# Test with sample data
-python golden-bets-ai/test_filter.py
 ```
 
 ---
@@ -183,6 +227,7 @@ Response:
       "confidence_score": 0.87,
       "ensemble_agreement": 0.95,
       "golden_score": 0.894,
+      "bet_category": "golden",
       "reasoning": "🏆 Golden Bet Selection Criteria Met..."
     }
   ],
@@ -220,6 +265,16 @@ Track Golden Bets performance:
 
 **Cause:** Models disagree significantly  
 **Solution:** Retrain models with consistent data or adjust `MIN_ENSEMBLE_AGREEMENT`
+
+---
+
+## Module Files
+
+- **`predict.py`** - Main prediction pipeline (recommended entry point)
+- **`filter.py`** - Core filtering logic
+- **`config.py`** - Configuration settings
+- **`test_filter.py`** - Test script with sample data
+- **`__init__.py`** - Module exports
 
 ---
 
