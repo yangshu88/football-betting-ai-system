@@ -6,9 +6,9 @@
 
 ## 🚀 Deployment Status
 
-| Component | Status | URL |
-|-----------|--------|-----|
-| **Production API** | ✅ Live | https://football-betting-ai-system-production.up.railway.app |
+| Component | Status | Details |
+|-----------|--------|---------|
+| **Deployment Platform** | ✅ Render | Free tier, auto-deploy enabled |
 | **GitHub Actions** | ✅ Active | [View Workflows](https://github.com/dannythehat/football-betting-ai-system/actions) |
 | **Model Training** | ✅ Automated | Runs weekly + on-demand |
 | **Testing Suite** | ✅ Running | Every 6 hours |
@@ -78,6 +78,29 @@ https://github.com/dannythehat/football-betting-ai-system/actions
 
 ---
 
+## 🚀 Deployment Instructions
+
+### Deploy to Render (5 Minutes)
+
+1. **Create Render Account**
+   - Go to https://render.com
+   - Sign up with GitHub
+
+2. **Deploy from Blueprint**
+   - Click "New +" → "Blueprint"
+   - Select this repository
+   - Click "Apply"
+   - Wait 3-5 minutes
+
+3. **Verify Deployment**
+   ```bash
+   curl https://your-app-name.onrender.com/health
+   ```
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed guide.
+
+---
+
 ## 📈 System Health Indicators
 
 ### ✅ Healthy When:
@@ -114,9 +137,9 @@ gh workflow run full-test-deploy.yml
 ```
 Or: Go to Actions → Full Test & Deploy → Run workflow
 
-### Check API Health
+### Check API Health (After Deployment)
 ```bash
-curl https://football-betting-ai-system-production.up.railway.app/health
+curl https://your-app-name.onrender.com/health
 ```
 
 ---
@@ -126,19 +149,18 @@ curl https://football-betting-ai-system-production.up.railway.app/health
 | Document | Purpose |
 |----------|---------|
 | [README.md](README.md) | Project overview |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Deployment guide |
-| [TESTING_VALIDATION.md](TESTING_VALIDATION.md) | Testing details |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Deploy to Render guide |
 | [API_DOCUMENTATION.md](API_DOCUMENTATION.md) | API reference |
 | [QUICKSTART.md](QUICKSTART.md) | Quick start guide |
 
 ---
 
-## ✅ Current Status: FULLY OPERATIONAL
+## ✅ Current Status: READY TO DEPLOY
 
 **All systems automated and working:**
 - ✅ Models training automatically
 - ✅ Tests running every 6 hours
-- ✅ Deployment live on Railway
+- ✅ Deployment config ready (Render)
 - ✅ API endpoints functional
 - ✅ Documentation complete
 - ✅ No manual intervention required
@@ -149,10 +171,36 @@ curl https://football-betting-ai-system-production.up.railway.app/health
 
 ## 🎯 What You Can Do Now
 
-1. **Monitor:** Check workflow runs periodically
-2. **Test:** Use API endpoints for predictions
-3. **Review:** Check test results in `test-results/`
-4. **Verify:** View model metrics in `smart-bets-ai/models/`
-5. **Relax:** System runs itself ✅
+1. **Deploy:** Follow [DEPLOYMENT.md](DEPLOYMENT.md) to deploy to Render
+2. **Monitor:** Check workflow runs periodically
+3. **Test:** Use API endpoints for predictions
+4. **Review:** Check test results in `test-results/`
+5. **Verify:** View model metrics in `smart-bets-ai/models/`
 
 **No babysitting required!**
+
+---
+
+## 💡 Free Tier Notes
+
+### Render Free Tier
+- 750 hours/month (enough for testing)
+- Sleeps after 15 minutes of inactivity
+- Cold start: 30-60 seconds after sleep
+- Free PostgreSQL (256MB)
+- Free Redis (25MB)
+
+### Upgrade to Starter ($7/month)
+- No sleep
+- Always on
+- Faster performance
+- Better for production
+
+---
+
+## 🔗 Quick Links
+
+- **Deploy Now:** https://render.com
+- **Workflows:** https://github.com/dannythehat/football-betting-ai-system/actions
+- **Deployment Guide:** [DEPLOYMENT.md](DEPLOYMENT.md)
+- **API Docs:** [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
