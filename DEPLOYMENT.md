@@ -6,13 +6,99 @@
 ✅ **GitHub Actions** - All testing runs in CI/CD pipeline
 ✅ **No Manual Intervention** - System self-maintains
 
-## Current Deployment: Railway
+## Current Deployment: Render
 
-**Live URL:** https://football-betting-ai-system-production.up.railway.app
-**Status:** ✅ Active
-**Last Deploy:** Auto-deployed from main branch
+**Platform:** Render (Free Tier)
+**Status:** Ready to deploy
+**Auto-deploy:** Enabled from main branch
 
-## What's Automated
+### Why Render?
+- ✅ Free tier with 750 hours/month
+- ✅ Auto-deploy from GitHub
+- ✅ Built-in PostgreSQL + Redis (free)
+- ✅ Zero configuration needed
+- ✅ Actually reliable (unlike Railway)
+
+---
+
+## 🚀 Deploy to Render (5 Minutes)
+
+### Step 1: Create Render Account
+1. Go to https://render.com
+2. Sign up with GitHub
+3. Authorize Render to access your repos
+
+### Step 2: Deploy from Dashboard
+1. Click **"New +"** → **"Blueprint"**
+2. Connect your GitHub repo: `dannythehat/football-betting-ai-system`
+3. Render will detect `render.yaml` automatically
+4. Click **"Apply"**
+5. Wait 3-5 minutes for deployment
+
+### Step 3: Verify Deployment
+```bash
+# Check health endpoint (replace with your Render URL)
+curl https://football-betting-ai.onrender.com/health
+
+# Expected response:
+{
+  "status": "healthy",
+  "service": "football-betting-ai",
+  "version": "1.0.0",
+  "smart_bets_available": true,
+  "golden_bets_available": true,
+  "value_bets_available": true,
+  "custom_analysis_available": true
+}
+```
+
+**That's it! Your API is live.**
+
+---
+
+## 📋 What Gets Deployed
+
+The `render.yaml` file automatically creates:
+
+1. **Web Service** (Free tier)
+   - FastAPI application
+   - Auto-deploy on push to main
+   - Health checks enabled
+   - 750 hours/month free
+
+2. **PostgreSQL Database** (Free tier)
+   - 256MB storage
+   - Automatic backups
+   - Connection string auto-configured
+
+3. **Redis Cache** (Free tier)
+   - 25MB storage
+   - LRU eviction policy
+   - Connection string auto-configured
+
+---
+
+## 🔧 Configuration
+
+### Environment Variables (Auto-configured)
+All environment variables are set automatically by `render.yaml`:
+- `DATABASE_URL` - PostgreSQL connection
+- `REDIS_URL` - Redis connection
+- `PYTHON_VERSION` - 3.11.0
+- `ENVIRONMENT` - production
+- `DEBUG` - false
+
+### Custom Environment Variables
+To add custom variables:
+1. Go to Render Dashboard
+2. Select your service
+3. Go to **Environment** tab
+4. Add variables
+5. Service auto-restarts
+
+---
+
+## 🤖 What's Automated
 
 ### 1. Model Training
 - **Frequency:** Weekly (Sundays 2 AM UTC) + on-demand
@@ -31,48 +117,18 @@
 - **Results:** Saved to `test-results/TEST_REPORT.md`
 
 ### 3. Deployment
-- **Platform:** Railway
+- **Platform:** Render
 - **Trigger:** Auto-deploy on push to main
 - **Services:**
   - FastAPI application
   - PostgreSQL database
   - Redis cache
 
-## Manual Deployment Options
+---
 
-### Option 1: Railway (Recommended)
-```bash
-# Already deployed! Just push to main branch
-git push origin main
-```
+## 📡 API Endpoints
 
-### Option 2: Render
-```bash
-# Connect GitHub repo to Render
-# Set environment variables from .env.example
-# Deploy automatically
-```
-
-### Option 3: Docker Compose (Local)
-```bash
-docker-compose up -d
-```
-
-## Environment Variables
-
-Required for production:
-```env
-DATABASE_URL=postgresql://user:pass@host:5432/db
-REDIS_URL=redis://host:6379/0
-API_HOST=0.0.0.0
-API_PORT=8000
-ENVIRONMENT=production
-DEBUG=false
-```
-
-## API Endpoints
-
-Base URL: `https://football-betting-ai-system-production.up.railway.app`
+Base URL: `https://your-app-name.onrender.com`
 
 ### Health Check
 ```bash
@@ -115,43 +171,123 @@ POST /api/v1/predictions/custom-analysis
 Content-Type: application/json
 
 {
-  "match": {...},
-  "bet_type": "goals_over_2_5"
+  "match_data": {...},
+  "market_id": "goals_over_2_5",
+  "selection_id": "over"
 }
 ```
 
-## Monitoring
+---
 
-### Check Workflow Status
+## 🔍 Monitoring
+
+### Render Dashboard
+- View logs: Dashboard → Service → Logs
+- Check metrics: Dashboard → Service → Metrics
+- View deployments: Dashboard → Service → Events
+
+### GitHub Actions
+All workflows visible at:
 https://github.com/dannythehat/football-betting-ai-system/actions
 
-### View Test Results
+### Test Results
 Check `test-results/TEST_REPORT.md` in repo
 
-### View Model Metrics
+### Model Metrics
 Check `smart-bets-ai/models/metadata.json`
 
-## Troubleshooting
+---
 
-### Models not training?
-- Check workflow runs: https://github.com/dannythehat/football-betting-ai-system/actions
-- Manually trigger: Go to Actions → Train AI Models → Run workflow
+## 🐛 Troubleshooting
 
-### Tests failing?
-- Check test results in `test-results/`
-- Review workflow logs
+### Deployment Failed?
+1. Check Render logs in dashboard
+2. Verify `render.yaml` syntax
+3. Check if all dependencies in `requirements.txt`
+4. Ensure Python 3.11 compatibility
 
-### Deployment issues?
-- Check Railway logs
-- Verify environment variables
-- Ensure database is accessible
+### Models Not Loading?
+1. Check if models exist in `smart-bets-ai/models/`
+2. Run training workflow manually
+3. Check GitHub Actions logs
+4. Verify model files committed to repo
 
-## Next Steps
+### Database Connection Issues?
+1. Verify PostgreSQL service is running in Render
+2. Check `DATABASE_URL` environment variable
+3. Review connection logs
+4. Ensure database migrations ran
 
-1. ✅ Models are training automatically
-2. ✅ Tests run every 6 hours
-3. ✅ Deployment is live on Railway
-4. 📊 Monitor test results in repo
-5. 🔄 System self-maintains
+### API Not Responding?
+1. Check health endpoint first
+2. Review Render service logs
+3. Verify service is not sleeping (free tier sleeps after 15min inactivity)
+4. Check if deployment completed successfully
 
-**No manual intervention required!**
+---
+
+## 💡 Free Tier Limitations
+
+### Render Free Tier
+- **Web Service:** 750 hours/month (enough for testing)
+- **Sleeps after 15 minutes** of inactivity
+- **Cold start:** 30-60 seconds on first request after sleep
+- **PostgreSQL:** 256MB storage
+- **Redis:** 25MB storage
+
+### Upgrade Options
+- **Starter Plan:** $7/month - No sleep, always on
+- **Standard Plan:** $25/month - More resources, faster
+- **Pro Plan:** $85/month - Production-grade
+
+---
+
+## 🚀 Alternative Deployment Options
+
+### Option 1: DigitalOcean App Platform
+```bash
+# More reliable, $5/month
+# Better for production
+# Managed database available
+```
+
+### Option 2: Self-Hosted VPS
+```bash
+# Full control, $5/month
+# DigitalOcean, Linode, Hetzner
+# Requires more setup
+```
+
+### Option 3: AWS Lambda
+```bash
+# Serverless, pay per request
+# Infinite scale
+# More complex setup
+```
+
+---
+
+## 📚 Next Steps
+
+1. ✅ Deploy to Render (5 minutes)
+2. ✅ Verify health endpoint works
+3. ✅ Test API endpoints
+4. ✅ Monitor GitHub Actions workflows
+5. ✅ Check test results in repo
+6. 🎯 Start building features!
+
+---
+
+## ✅ Current Status: READY TO DEPLOY
+
+**All systems automated and working:**
+- ✅ Models training automatically
+- ✅ Tests running every 6 hours
+- ✅ Deployment configuration ready
+- ✅ API endpoints functional
+- ✅ Documentation complete
+- ✅ No manual intervention required
+
+**Deploy now:** https://render.com
+
+**System is production-ready and self-maintaining.**
