@@ -1,10 +1,10 @@
 # Football Betting AI System
 
-> **🎉 Phase 2 Complete!** Smart Bets AI is now fully functional. Train models and start making predictions!  
-> **📊 Progress:** 50% Complete (2 of 5 phases done)  
-> **✅ Working:** Data Ingestion, Smart Bets AI  
-> **🔄 Next:** Golden Bets AI (85%+ confidence filtering)  
-> **📖 Quick Start:** See [SMART_BETS_QUICKSTART.md](SMART_BETS_QUICKSTART.md)
+> **🎉 Phase 3 Complete!** Golden Bets AI is now fully functional with 85%+ confidence filtering!  
+> **📊 Progress:** 60% Complete (3 of 5 phases done)  
+> **✅ Working:** Data Ingestion, Smart Bets AI, Golden Bets AI  
+> **🔄 Next:** Value Bets AI (EV calculations & odds processing)  
+> **📖 Quick Start:** See [GOLDEN_BETS_QUICKSTART.md](GOLDEN_BETS_QUICKSTART.md)
 
 ---
 
@@ -31,7 +31,7 @@ This system focuses exclusively on:
 ✅ **Accepts data** from your app (fixtures, stats, odds for the 4 markets)  
 ✅ **Runs AI models** to generate predictions for the 4 markets  
 ✅ **Delivers four betting intelligence features:**
-- **Golden Bets:** 1-3 daily picks with 85%+ win probability (safety-focused) *[Coming in Phase 3]*
+- **Golden Bets:** 1-3 daily picks with 85%+ win probability (safety-focused) **[✅ WORKING NOW]**
 - **Value Bets:** Top 3 daily picks with positive expected value (profit-focused) *[Coming in Phase 4]*
 - **Smart Bets:** Best single bet per fixture across the 4 markets (match-specific) **[✅ WORKING NOW]**
 - **Custom Bet Analysis:** User-selected fixture + bet type analysis from the 4 markets (interactive learning) *[Coming in Phase 5]*
@@ -63,25 +63,30 @@ pip install -r requirements.txt
 # 2. Train models
 python smart-bets-ai/train.py
 
-# 3. Test predictions
+# 3. Test Smart Bets
 python smart-bets-ai/predict.py
 
-# 4. Start API
+# 4. Test Golden Bets
+python golden-bets-ai/test_filter.py
+
+# 5. Start API
 cd user-api && python main.py
 
-# 5. Make prediction
-curl -X POST http://localhost:8000/api/v1/predictions/smart-bets \
+# 6. Make predictions
+curl -X POST http://localhost:8000/api/v1/predictions/golden-bets \
   -H "Content-Type: application/json" \
   -d '{"matches": [...]}'
 ```
 
-**Full guide:** [SMART_BETS_QUICKSTART.md](SMART_BETS_QUICKSTART.md)
+**Full guides:**  
+- [SMART_BETS_QUICKSTART.md](SMART_BETS_QUICKSTART.md)  
+- [GOLDEN_BETS_QUICKSTART.md](GOLDEN_BETS_QUICKSTART.md)
 
 ---
 
 ## The Four Betting Intelligence Features
 
-### 1. Golden Bets (Premium Feature) *[Phase 3 - Coming Soon]*
+### 1. Golden Bets (Premium Feature) **[✅ WORKING NOW]**
 **Daily 1-3 picks | 85%+ win probability**
 
 **Purpose:** Present users with the platform's most confident, safe betting opportunities each day from the 4 markets.
@@ -94,9 +99,13 @@ curl -X POST http://localhost:8000/api/v1/predictions/smart-bets \
 
 **AI Approach:** 
 - Confidence threshold filtering (85%+ probability)
-- Ensemble model agreement metrics
-- Historical validation of prediction accuracy
+- Ensemble model agreement metrics (90%+ consensus)
+- Composite golden score (70% probability + 30% agreement)
 - Evaluates all 4 markets to find highest confidence picks
+
+**Status:** ✅ Fully implemented and working  
+**Documentation:** [golden-bets-ai/README.md](golden-bets-ai/README.md)  
+**API Endpoint:** `POST /api/v1/predictions/golden-bets`
 
 ---
 
@@ -171,13 +180,13 @@ Receives and validates fixture data, team stats, and odds for the 4 markets from
 ### **smart-bets-ai/** ✅ Complete
 Calculates pure probabilistic predictions for each match across the 4 markets using AI models (XGBoost/LightGBM baseline).
 
-### **golden-bets-ai/** 🔄 Next
+### **golden-bets-ai/** ✅ Complete
 Identifies high-confidence bets (85%+) across the 4 markets using confidence thresholds and ensemble agreement metrics.
 
-### **odds-updater/** ⏳ Pending
+### **odds-updater/** 🔄 Next
 Processes odds updates from your app for real-time value calculations across the 4 markets.
 
-### **value-bets-ai/** ⏳ Pending
+### **value-bets-ai/** 🔄 Next
 Dynamically recalculates value bets by comparing AI probabilities vs implied odds probabilities for the 4 markets.
 
 ### **summary-generator/** ⏳ Pending
@@ -237,7 +246,14 @@ Serves predictions and explanations to your main app via REST API endpoints.
 {
   "predictions": [{
     "match_id": "12345",
-    "golden_bets": [{ }],
+    "golden_bets": [{
+      "market_name": "Total Corners",
+      "selection_name": "Over 9.5",
+      "confidence_score": 0.87,
+      "ensemble_agreement": 0.95,
+      "golden_score": 0.894,
+      "reasoning": "🏆 Golden Bet Selection Criteria Met..."
+    }],
     "value_bets": [{ }],
     "smart_bets": [{
       "market_id": "total_corners",
@@ -277,10 +293,10 @@ See [SCOPE.md](SCOPE.md) for complete data format specifications.
 2. **✅ Smart Bets AI:** (Phase 2 - Complete)
    Develop 4 separate models (Goals, Cards, Corners, BTTS) using XGBoost. Train on historical data.
 
-3. **🔄 Golden Bets AI:** (Phase 3 - Next)
+3. **✅ Golden Bets AI:** (Phase 3 - Complete)
    Implement 85%+ confidence filtering and ensemble validation.
 
-4. **⏳ Odds Processing & Value Bets:** (Phase 4 - Pending)
+4. **🔄 Odds Processing & Value Bets:** (Phase 4 - Next)
    Create odds-updater and value-bets-ai for dynamic EV calculations.
 
 5. **⏳ Explanations & Polish:** (Phase 5 - Pending)
@@ -307,8 +323,8 @@ The system trains **4 separate models**, one for each market:
 
 ### Golden Bets
 - High confidence threshold (85%+)
-- Ensemble agreement validation
-- Historical win rate verification
+- Ensemble agreement validation (90%+)
+- Composite golden score (70% probability + 30% agreement)
 - Scans all 4 markets for highest confidence picks
 
 ### Value Bets
@@ -326,10 +342,10 @@ Same trained models applied to user-selected bets from the 4 markets with educat
 ## Strategic Feature Positioning
 
 | Feature | Focus | Confidence | Markets Analyzed | User Type |
-|---------|-------|------------|------------------|-----------|\
-| Golden Bets | Win rate | Highest (85%+) | All 4 markets | Premium - Safety seekers |\
-| Value Bets | ROI/EV | Variable | All 4 markets | Premium - Strategic bettors |\
-| Smart Bets | Per-match | High | All 4 markets | All users - Match focus |\
+|---------|-------|------------|------------------|-----------|
+| Golden Bets | Win rate | Highest (85%+) | All 4 markets | Premium - Safety seekers |
+| Value Bets | ROI/EV | Variable | All 4 markets | Premium - Strategic bettors |
+| Smart Bets | Per-match | High | All 4 markets | All users - Match focus |
 | Custom Analysis | Education | Variable | User-selected from 4 | Advanced - Learning |
 
 **User Journey:**
@@ -358,7 +374,7 @@ Your App → [JSON Input] → AI Prediction Engine → [JSON Output] → Your Ap
                     ┌─────────┴─────────┐
                     │                   │
               Smart Bets AI      Golden Bets AI (85%+ threshold)
-           (4 Market Models)      (4 Market Models)
+           (4 Market Models)      (Ensemble agreement 90%+)
                     │                   │
                     └─────────┬─────────┘
                               ↓
@@ -382,14 +398,17 @@ Your App → [JSON Input] → AI Prediction Engine → [JSON Output] → Your Ap
 - **[GETTING_STARTED.md](GETTING_STARTED.md)** - Setup instructions
 - **[QUICKSTART.md](QUICKSTART.md)** - Developer quick start
 - **[SMART_BETS_QUICKSTART.md](SMART_BETS_QUICKSTART.md)** - Smart Bets 5-minute guide
+- **[GOLDEN_BETS_QUICKSTART.md](GOLDEN_BETS_QUICKSTART.md)** - Golden Bets 5-minute guide
 - **[PHASE_2_SUMMARY.md](PHASE_2_SUMMARY.md)** - Phase 2 implementation details
 - **[smart-bets-ai/README.md](smart-bets-ai/README.md)** - Smart Bets AI documentation
+- **[golden-bets-ai/README.md](golden-bets-ai/README.md)** - Golden Bets AI documentation
 
 ---
 
 ## Notes
 
 - System processes batch predictions each morning for the 4 markets
+- Golden Bets filter Smart Bets predictions for 85%+ confidence
 - Odds updates trigger value bet recalculations
 - All predictions cached for fast API responses
 - Custom analysis provides educational feedback with confidence context
