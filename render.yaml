@@ -25,12 +25,11 @@ services:
           type: redis
           name: football-betting-redis
           property: connectionString
- # Redis Cache
+
  - type: redis
-    name: football-betting-redis
-    plan: free
-    region: oregon
-  #  maxmemoryPolicy: allkeys-lru
+   name: football-betting-redis
+   plan: free
+   region: oregon
 
 databases:
   # PostgreSQL Database
