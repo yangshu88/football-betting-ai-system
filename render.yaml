@@ -37,4 +37,4 @@ databases:
   - name: football-betting-redis
     plan: free
     region: oregon
-    maxmemoryPolicy: allkeys-lru
+  #  maxmemoryPolicy: allkeys-lru
