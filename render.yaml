@@ -26,11 +26,12 @@ services:
           name: football-betting-redis
           property: connectionString
 
-  # Redis Service (注意这里与上面的 - type: web 保持对齐)
+  # Redis Service
   - type: redis
     name: football-betting-redis
     plan: free
     region: oregon
+    ipAllowList: []  # <--- 加上这一行，表示仅内部访问
 
 databases:
   # PostgreSQL Database
