@@ -26,10 +26,11 @@ services:
           name: football-betting-redis
           property: connectionString
 
- - type: redis
-   name: football-betting-redis
-   plan: free
-   region: oregon
+  # Redis Service (注意这里与上面的 - type: web 保持对齐)
+  - type: redis
+    name: football-betting-redis
+    plan: free
+    region: oregon
 
 databases:
   # PostgreSQL Database
